@@ -1,42 +1,57 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Share, Button } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+import {Icon} from 'native-base';
+
+
+//Import halaman untuk navigasi
+import Home from './src/component/Home';
+
 
 import Splash from './src/component/Splash';
-import SignIn from './src/component/SignIn';
+import Login from './src/component/Login';
 
-class App extends Component {
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'Let\'s try Mangatoon',
+      });
 
-  constructor() {
-    super()
-    this.state = {
-      isLoading: true
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
     }
+  };
+
+
+
+const signIn = createStackNavigator(
+  {
+    Login: {
+      screen: Login,
+      hederStyle: 'none',
+      navigationOptions: { header: null }
+    },
+    Home: {
+      screen: Home,
+      headerStyle: 'For You',
+      navigationOptions: { header: null }
+    },
+    
+  },
+  {
+    initialRouteName: 'Login'
   }
+)
 
-  render(){
-    const { isLoading } = this.state
-
-    if(isLoading) {
-      return(
-        <Splash />
-      )
-    }
-
-    return(
-      <SignIn />
-    )
-  }
-
-  onLoading= () => {
-
-    setTimeout(() => {
-      this.setState({isLoading: false})
-    }, 3000)
-  }
-
-  componentDidMount(){
-    this.onLoading()
-  }
-}
-
-export default App;
+export default createAppContainer(signIn);

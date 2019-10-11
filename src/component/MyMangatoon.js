@@ -47,7 +47,9 @@ export default class MyMangatoon extends Component {
             renderItem={({item, index}) => {
                return(
                 <View style={{backgroundColor : '#ff6b81', marginHorizontal: 10, marginVertical: 10}}>
-                    <Image source={{uri: item.imageUrl }} style={{width: 100, height: 100}} />
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('EditMangatoon')}>
+                        <Image source={{uri: item.imageUrl }} style={{width: 100, height: 100}} />
+                    </TouchableOpacity>
                     <Text> {item.title} </Text>
                 </View>
                )

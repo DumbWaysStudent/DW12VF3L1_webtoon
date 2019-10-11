@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image, Dimensions } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+
 import { SearchBar, Card, Button } from 'react-native-elements';
-
-
 
 const data = [
   {
@@ -47,11 +46,12 @@ export default class MyFavorite extends Component{
     render(){
       const { search } = this.state
       return(
-        <View style={{backgroundColor: '#ff6b81', position:'relative'}}>
+        <View style={{backgroundColor: '#ff6b81'}}>
           <View>
               <SearchBar placeholder="Search here......." onChangeText={this.updateSearch} value={search} placeholderTextColor={"#FFFFFF"} 
               containerStyle={{backgroundColor: '#dfe4ea', borderBottomWidth: null, height: 50}} inputContainerStyle={{ backgroundColor: '#dfe4ea' }} />
           </View>
+
           <ScrollView>
             <View style={{justifyContent: 'center',alignItems: 'center'}}>
               <FlatList data={this.state.data} renderItem={({ item: rowData }) => {
@@ -74,6 +74,8 @@ export default class MyFavorite extends Component{
               keyExtractor={(item, index) => index} />
             </View>
           </ScrollView>
+          
+
           <View style={styles.footer}> 
             <TouchableOpacity onPress={() => this.props.navigation.navigate('Home')}>
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -81,7 +83,7 @@ export default class MyFavorite extends Component{
                 <Text styles={{fontWeight: 'bold'}}>For You</Text>
               </View>
             </TouchableOpacity>
-  
+
             <TouchableOpacity onPress={() => this.props.navigation.navigate('MyFavorite')}>
               <View style={{justifyContent: 'center', alignItems: 'center'}}>
                 <Icon name="star" style={{fontSize: 40}}/>
@@ -96,7 +98,8 @@ export default class MyFavorite extends Component{
               </View>
             </TouchableOpacity>
           </View>
-      </View>
+
+        </View>
       )
     }
 }

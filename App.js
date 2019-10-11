@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Share, Button, YellowBox } from 'react-native';
+import { View, Text, Share, Button } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {Icon} from 'native-base';
@@ -11,6 +11,7 @@ import Detail from './src/component/Detail';
 import DetailEpisode from './src/component/DetailEpisode';
 import MyFavorite from './src/component/MyFavorite';
 import Profile from './src/component/Profile';
+import EditProfile from './src/component/EditProfile';
 
 
 import Splash from './src/component/Splash';
@@ -81,6 +82,7 @@ const signIn = createStackNavigator(
     },
     MyFavorite: {
       screen: MyFavorite,
+      hederStyle: 'none',
       navigationOptions: { header: null }
     },
     Profile: {
@@ -97,7 +99,20 @@ const signIn = createStackNavigator(
         ),
       })
     },
-    
+    EditProfile: {
+      screen: EditProfile,
+      title: 'Edit Profile',
+      navigationOptions: ({navigation}) => ({
+        title: "Edit Profile",
+        headerTintColor: 'grey',
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        }, 
+        headerRight: (
+          <Icon name="ios-create" style={{ color: '#000', marginRight: 15, }} onPress={() => navigation.navigate('EditProfile')} />
+        ),
+      })
+    }
   },
   {
     initialRouteName: 'Login'
@@ -105,5 +120,3 @@ const signIn = createStackNavigator(
 )
 
 export default createAppContainer(signIn);
-
-console.disableYellowBox=true

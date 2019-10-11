@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Share, Button } from 'react-native';
+import { View, Text, Share, Button, YellowBox } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import {Icon} from 'native-base';
@@ -9,6 +9,7 @@ import {Icon} from 'native-base';
 import Home from './src/component/Home';
 import Detail from './src/component/Detail';
 import DetailEpisode from './src/component/DetailEpisode';
+import MyFavorite from './src/component/MyFavorite';
 
 
 import Splash from './src/component/Splash';
@@ -77,6 +78,10 @@ const signIn = createStackNavigator(
         ),
       })
     },
+    MyFavorite: {
+      screen: MyFavorite,
+      navigationOptions: { header: null }
+    },
     
   },
   {
@@ -85,3 +90,5 @@ const signIn = createStackNavigator(
 )
 
 export default createAppContainer(signIn);
+
+console.disableYellowBox=true

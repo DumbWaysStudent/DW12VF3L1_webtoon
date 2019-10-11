@@ -12,6 +12,8 @@ import DetailEpisode from './src/component/DetailEpisode';
 import MyFavorite from './src/component/MyFavorite';
 import Profile from './src/component/Profile';
 import EditProfile from './src/component/EditProfile';
+import MyMangatoon from './src/component/MyMangatoon';
+import MyMangatoonAdd from './src/component/MyMangatoonAdd';
 
 
 import Splash from './src/component/Splash';
@@ -112,11 +114,35 @@ const signIn = createStackNavigator(
           <Icon name="ios-create" style={{ color: '#000', marginRight: 15, }} onPress={() => navigation.navigate('EditProfile')} />
         ),
       })
-    }
+    },
+    MyMangatoon: {
+      screen: MyMangatoonAdd,
+      navigationOptions: () => ({
+        title: "My Mangatoon Add",
+        headerTintColor: 'grey',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      })
+    },
+    MyMangatoonAdd: {
+      screen: MyMangatoon,
+      navigationOptions: () => ({
+        title: "My Mangatoon",
+        headerTintColor: 'grey',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      })
+    },
+
   },
+  
   {
-    initialRouteName: 'Login'
+    initialRouteName: 'Home'
   }
 )
 
 export default createAppContainer(signIn);
+
+console.disableYellowBox = true;

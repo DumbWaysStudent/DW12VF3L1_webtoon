@@ -60,19 +60,24 @@ export default class EditProfile extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
-          <View
-            style={[styles.avatar, styles.avatarContainer, {marginBottom: 300}]}>
-            {this.state.avatarSource === null ? (
-              <Image source={Logo} style={styles.image} />
-            ) : (
-              <Image style={styles.avatar} source={this.state.avatarSource} />
-            )}
-          </View>
-        </TouchableOpacity>
+        <View>
+            <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+            <View
+                style={[styles.avatar, styles.avatarContainer, {marginBottom: 300}]}>
+                {this.state.avatarSource === null ? (
+                <Image source={Logo} style={styles.image} />
+                ) : (
+                <Image style={styles.avatar} source={this.state.avatarSource} />
+                )}
+            </View>
+            </TouchableOpacity>
+            
+        </View>
 
-        <View style={styles.navProfile}>
-            <TextInput placeholder="Edit here....." style={styles.textEditProfile} />
+        <View>
+            <View style={[styles.navProfile]}>
+                <TextInput placeholder="Edit here....." style={styles.textEditProfile} />
+            </View>
         </View>
 
         {this.state.videoSource && (
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
         borderRadius: 100
     },
     navProfile: {
-        marginTop: 25,
+        marginTop: -250,
         alignItems: 'center'
     },
     create: {

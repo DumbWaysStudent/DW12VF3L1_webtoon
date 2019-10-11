@@ -12,7 +12,7 @@ export default class Profile extends Component{
                 </View>
                 <View style={styles.navProfile}>
                     <View style={styles.create}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MyMangatoon')}>
                             <Text>My Creation Mangatoon</Text>
                         </TouchableOpacity>
                     </View>

@@ -9,16 +9,12 @@ export default class MyMangaToonAdd extends Component{
             data: [
                 {
                     imageUrl: "https://static.bandainamcoent.eu/high/one-piece/one-piece-thousand-storms/03-news/1-opts_first-anniversary.jpg",
-                    title: "Episode 1"
+                    title: "1.png",
                 },
                 {
                     imageUrl: "https://onepiecetheories.com/wp-content/uploads/2018/11/one-piece-chapter-923-luffy-vs-kaido-1200x675.jpg",
-                    title: "Episode 2"
+                    title: "2.png",
                 },
-                {
-                    imageUrl: "http://onepiece-treasurecruise.com/en/wp-content/uploads/c2019.png",
-                    title: "Episode 3"
-                }
             ]
         }
     }
@@ -44,7 +40,11 @@ export default class MyMangaToonAdd extends Component{
                                             <Text style={{ marginBottom: 10, fontSize: 14, textTransform: 'capitalize', fontWeight: "bold" }}>
                                                 {item.title}
                                             </Text>
-                                            <Text>17 Agustus 1945</Text>
+                                            <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: 'grey', height: 35, width: 70}}>
+                                                <TouchableOpacity onPress={() => this.props.navigation.navigate('EditWebtoon')}>
+                                                    <Text>Delete</Text>
+                                                </TouchableOpacity>
+                                            </View>
                                         </View>
                                     </View>
                                 )
@@ -55,7 +55,7 @@ export default class MyMangaToonAdd extends Component{
                 
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('AddEpisode')}>
                     <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: 'grey', marginHorizontal: 15}}> 
-                        <Text style={{marginHorizontal: 15, marginTop: 20, height: 40}}>+ Add Episode</Text>
+                        <Text style={{marginHorizontal: 15, marginTop: 20, height: 40}}>+ Image</Text>
                     </View>
                 </TouchableOpacity>
             </View>

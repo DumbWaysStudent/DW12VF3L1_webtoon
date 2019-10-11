@@ -14,6 +14,7 @@ import Profile from './src/component/Profile';
 import EditProfile from './src/component/EditProfile';
 import MyMangatoon from './src/component/MyMangatoon';
 import MyMangatoonAdd from './src/component/MyMangatoonAdd';
+import AddEpisode from './src/component/AddEpisode';
 
 
 import Splash from './src/component/Splash';
@@ -137,6 +138,16 @@ const signIn = createStackNavigator(
           <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
         ),
       })
+    },
+    AddEpisode: {
+      screen: AddEpisode,
+      navigationOptions: () => ({
+        title: "Add Episode",
+        headerTintColor: 'grey',
+        headerRight: (
+          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
+        ),
+      }),
     },
 
   },

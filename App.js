@@ -116,16 +116,6 @@ const signIn = createStackNavigator(
       })
     },
     MyMangatoon: {
-      screen: MyMangatoonAdd,
-      navigationOptions: () => ({
-        title: "My Mangatoon Add",
-        headerTintColor: 'grey',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      })
-    },
-    MyMangatoonAdd: {
       screen: MyMangatoon,
       navigationOptions: () => ({
         title: "My Mangatoon",
@@ -133,6 +123,19 @@ const signIn = createStackNavigator(
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+      })
+    },
+    MyMangatoonAdd: {
+      screen: MyMangatoonAdd,
+      navigationOptions: () => ({
+        title: "My Mangatoon Add",
+        headerTintColor: 'grey',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
+        ),
       })
     },
 

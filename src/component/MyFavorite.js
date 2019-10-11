@@ -40,17 +40,13 @@ import Slideshow from 'react-native-image-slider-show';
  
 export default class Home extends Component {
 
-    //SLIDER IMAGE
+    
     constructor(props) {
         super(props);
      
         this.state = {
           data: data //mengambil data dari variabel konstan
         };
-    }
-
-    addProductToCart = () => {
-        Alert.alert('Success', 'The product has been added to your cart')
     }
 
     state = {

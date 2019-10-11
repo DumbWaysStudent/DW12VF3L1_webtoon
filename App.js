@@ -7,6 +7,7 @@ import {Icon} from 'native-base';
 
 //Import halaman untuk navigasi
 import Home from './src/component/Home';
+import Detail from './src/component/Detail';
 
 
 import Splash from './src/component/Splash';
@@ -46,6 +47,20 @@ const signIn = createStackNavigator(
       screen: Home,
       headerStyle: 'For You',
       navigationOptions: { header: null }
+    },
+    Detail: {
+      screen: Detail,
+      title: 'Detail Manga',
+      navigationOptions: () => ({
+        title: "Detail Manga",
+        headerTintColor: 'grey',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+          <Icon name="share-alt" style={{ color: '#000', marginRight: 15, }} onPress={() => onShare()} />
+        ),
+      })
     },
     
   },

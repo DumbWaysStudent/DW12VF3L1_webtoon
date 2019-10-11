@@ -10,6 +10,7 @@ import Home from './src/component/Home';
 import Detail from './src/component/Detail';
 import DetailEpisode from './src/component/DetailEpisode';
 import MyFavorite from './src/component/MyFavorite';
+import Profile from './src/component/Profile';
 
 
 import Splash from './src/component/Splash';
@@ -81,6 +82,20 @@ const signIn = createStackNavigator(
     MyFavorite: {
       screen: MyFavorite,
       navigationOptions: { header: null }
+    },
+    Profile: {
+      screen: Profile,
+      title: 'Profile',
+      navigationOptions: ({navigation}) => ({
+        title: "Profile",
+        headerTintColor: 'grey',
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        }, 
+        headerRight: (
+          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15, fontWeight: 'bold' }} onPress={() => navigation.navigate('EditProfile')} />
+        ),
+      })
     },
     
   },

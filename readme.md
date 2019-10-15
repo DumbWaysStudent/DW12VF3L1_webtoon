@@ -42,4 +42,4 @@
 
 ## Test For You Implementation
 
-<img src="./image_git/ForYpu.PNG" width="800" alt="get semua webtoon"/>
+<img src="./image_git/ForYou.PNG" width="800" alt="get semua webtoon"/>

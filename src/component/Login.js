@@ -6,7 +6,7 @@ import{ stackNavigator } from 'react-navigation';
 
 import Home from './Home';
 
-import bgImage from '../../image/bgImage.jpeg';
+//import bgImage from '../../image/bgImage.jpeg';
 import Logo from '../../image/Logo.png';
 
 
@@ -47,7 +47,7 @@ export default class SignIn extends Component {
     //const { navigate } = this.props.navigation;
     console.log(this.props)
     return (
-      <ImageBackground source={bgImage} style={{ width: null, height: null, justifyContent: 'center', alignContent: 'center', flex: 1}}>
+
 
         <View style={styles.container}>
 
@@ -61,7 +61,7 @@ export default class SignIn extends Component {
             <Item style={styles.pastContainer}>
               <Input placeholder="Email........" onChangeText={email => this.emailValidator(email)} placeholderTextColor="#dddddd" />
             </Item>
- 
+
             <Item style={styles.pastContainer}>
               <Input secureTextEntry={this.state.status} placeholder="Password......." placeholderTextColor="#dddddd" style={styles.textInput} />
               <Icon name={this.state.status ? "eye" : "eye-off"} onPress={() => this.changeIcon()} style={{marginRight: 10, color: "#ffffff"}} />
@@ -76,8 +76,8 @@ export default class SignIn extends Component {
 
         </View>
 
-      </ImageBackground>
-      
+
+
     );
   }
 }
@@ -86,6 +86,7 @@ const styles = {
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: '#16a085'
   },
   logo: {
     width: 120,

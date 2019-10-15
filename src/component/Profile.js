@@ -1,66 +1,36 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, FlatList, TouchableOpacity, Image } from 'react-native';
+import React, {Component} from 'react';
+import {Image} from 'react-native';
+import {Container, View, Text, Content, Icon, Button} from 'native-base';
 
-import Logo from '../../image/orang-tua.jpg';
+import FooterApp from '../headerfooter/FooterApp'
 
-export default class Profile extends Component{
-    render(){
-        return(
-            <View style={styles.container}>
-                <View>
-                    <Image source={Logo} style={styles.image} />
-                </View>
-                <View style={styles.navProfile}>
-                    <View style={styles.create}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('MyMangatoon')}>
-                            <Text>My Creation Mangatoon</Text>
-                        </TouchableOpacity>
-                    </View>
+export default class Favourite extends Component{
+  render(){
+    return(
+      <Container>
+        <Content>
+          <View style={{marginTop: 30, justifyContent: 'center', alignItems: 'center'}}>
+            <Image source={{uri: 'https://images.bewakoof.com/original/shinchan-music-sweatshirt-women-s-printed-crewneck-sweatshirts-aw18-213686-1553761960.jpg'}} style={{height: 200, width: 200, borderRadius: 100}} />
+            <Text style={{marginTop: 15, fontWeight: 'bold', fontSize: 24}}>Irwanto Wibowo</Text>
+          </View>
+        </Content>
 
-                    <View style={styles.logout}>
-                        <TouchableOpacity>
-                            <Text>Logout</Text>
-                        </TouchableOpacity>
-                    </View>
-                    
-                </View>
-            </View>
-        )
-    }
+        <Content>
+          <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 40}}>
+            <Button onPress={() => this.props.navigation.navigate('MyCartoon')}>
+              <Text>My Webtoon Create</Text>
+            </Button>
+
+            <Button style={{marginTop: 10}} onPress={() => this.props.navigation.navigate('Login')}>
+              <Text>Logout</Text>
+            </Button>
+
+          </View>
+        </Content>
+
+        <FooterApp test={this.props.navigation.navigate}/>
+      </Container>
+
+    )
+  }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        marginTop: 40,
-    },
-    image: {
-        height: 200,
-        width: 200,
-        borderRadius: 100
-    },
-    navProfile: {
-        marginTop: 25,
-        alignItems: 'center'
-    },
-    create: {
-        marginTop: 20,
-        backgroundColor: 'grey',
-        width: 200,
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 25,
-    },
-    logout: {
-        marginTop: 20,
-        backgroundColor: 'grey',
-        width: 200,
-        height: 40,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 25,
-    }
-})
-

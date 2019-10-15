@@ -1,195 +1,233 @@
-import React, { Component } from 'react';
-import { View, Text, Share, Button } from 'react-native';
-import { createAppContainer } from 'react-navigation';
+import React, {Component} from 'react';
+import {Share} from 'react-native';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import {Icon} from 'native-base';
+import { Container, Header, Item, Input, Icon, Button, Text, Content, Footer, FooterTab } from 'native-base';
 
-
-//Import halaman untuk navigasi
 import Home from './src/component/Home';
-import Detail from './src/component/Detail';
+import DetailCartoon from './src/component/DetailCartoon';
 import DetailEpisode from './src/component/DetailEpisode';
-import MyFavorite from './src/component/MyFavorite';
+import Favourite from './src/component/Favourite';
 import Profile from './src/component/Profile';
-import EditProfile from './src/component/EditProfile';
-import MyMangatoon from './src/component/MyMangatoon';
-import MyMangatoonAdd from './src/component/MyMangatoonAdd';
-import AddEpisode from './src/component/AddEpisode';
-import EditMangatoon from './src/component/EditMangatoon';
-import DeleteEpisode from './src/component/DeleteEpisode';
-import EditMangatoonEpisode from './src/component/EditMangatoonEpisode';
+import ProfileEdit from './src/component/ProfileEdit';
+import MyCartoon from './src/component/MyCartoon';
+import AddCartoon from './src/component/AddCartoon';
+import AddEpisodeCartoon from './src/component/AddEpisodeCartoon';
+import EditCartoon from './src/component/EditCartoon';
+import EditEpisodeCartoon from './src/component/EditEpisodeCartoon';
 
-
-import Splash from './src/component/Splash';
 import Login from './src/component/Login';
+import { from } from 'rxjs';
 
-  const onShare = async () => {
-    try {
-      const result = await Share.share({
-        message:
-          'Let\'s try Mangatoon',
-      });
+//this is to share the manga
+const onShare = async () => {
+  try {
+    const result = await Share.share({
+      message:
+        'Let\'s try Mangatoon',
+    });
 
-      if (result.action === Share.sharedAction) {
-        if (result.activityType) {
-          // shared with activity type of result.activityType
-        } else {
-          // shared
-        }
-      } else if (result.action === Share.dismissedAction) {
-        // dismissed
+    if (result.action === Share.sharedAction) {
+      if (result.activityType) {
+        // shared with activity type of result.activityType
+      } else {
+        // shared
       }
-    } catch (error) {
-      alert(error.message);
+    } else if (result.action === Share.dismissedAction) {
+      // dismissed
     }
-  };
+  } catch (error) {
+    alert(error.message);
+  }
+};
+//end of the share code
 
-
-
-const signIn = createStackNavigator(
+const login = createStackNavigator(
   {
     Login: {
       screen: Login,
-      hederStyle: 'none',
-      navigationOptions: { header: null }
-    },
+      headerStyle: 'none',
+      navigationOptions: {header: null}
+    }
+  },
+  {
+    initialRouteName: 'Login',
+  }
+)
+
+const project = createStackNavigator(
+  {
+    // Login: {
+    //   screen: Login,
+    //   headerStyle: 'none',
+    //   navigationOptions: {header: null}
+    // },
     Home: {
       screen: Home,
       headerStyle: 'For You',
-      navigationOptions: { header: null }
+      navigationOptions: {header: null}
     },
-    Detail: {
-      screen: Detail,
-      title: 'Detail Manga',
+    DetailCartoon: {
+      screen: DetailCartoon,
       navigationOptions: () => ({
         title: "Detail Manga",
-        headerTintColor: 'grey',
-        headerTitleStyle: {
-          fontWeight: 'bold',
+        headerTintColor: '#000',
+        headerStyle:{
+          backgroundColor: '#16a085'
         },
         headerRight: (
-          <Icon name="share-alt" style={{ color: '#000', marginRight: 15, }} onPress={() => onShare()} />
-        ),
+          <Icon type="FontAwesome" name="share-alt" size={45} onPress={() => onShare()} style={{marginRight: 15}} />
+        )
       })
     },
     DetailEpisode: {
       screen: DetailEpisode,
-      title: 'Detail Episode Manga',
       navigationOptions: () => ({
-        title: "Detail Manga",
-        headerTintColor: 'grey',
-        headerTitleStyle: {
-          fontWeight: 'bold',
+        title: "Detail Episode",
+        headerTintColor: '#000',
+        headerStyle:{
+          backgroundColor: '#16a085'
         },
         headerRight: (
-          <Icon name="share-alt" style={{ color: '#000', marginRight: 15, }} onPress={() => onShare()} />
-        ),
+          <Icon type="FontAwesome" name="share-alt" size={45} onPress={() => onShare()} style={{marginRight: 15}} />
+        )
       })
     },
-    MyFavorite: {
-      screen: MyFavorite,
-      hederStyle: 'none',
-      navigationOptions: { header: null }
+    Favourite: {
+      screen: Favourite,
+      navigationOptions: {header: null}
     },
     Profile: {
       screen: Profile,
       title: 'Profile',
       navigationOptions: ({navigation}) => ({
         title: "Profile",
-        headerTintColor: 'grey',
+        headerTintColor: '#00',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
         headerTitleStyle: {
           fontFamily: 'bold',
-        }, 
+        },
         headerRight: (
-          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15, fontWeight: 'bold' }} onPress={() => navigation.navigate('EditProfile')} />
+          <Icon type="FontAwesome" name="pencil" onPress={() => navigation.navigate('ProfileEdit')} style={{marginRight: 15}} />
         ),
       })
     },
-    EditProfile: {
-      screen: EditProfile,
+    ProfileEdit: {
+      screen: ProfileEdit,
       title: 'Edit Profile',
       navigationOptions: ({navigation}) => ({
         title: "Edit Profile",
-        headerTintColor: 'grey',
+        headerTintColor: '#000',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
         headerTitleStyle: {
           fontFamily: 'bold',
-        }, 
-        headerRight: (
-          <Icon name="ios-create" style={{ color: '#000', marginRight: 15, }} onPress={() => navigation.navigate('EditProfile')} />
-        ),
-      })
-    },
-    MyMangatoon: {
-      screen: MyMangatoon,
-      navigationOptions: () => ({
-        title: "My Mangatoon",
-        headerTintColor: 'grey',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-      })
-    },
-    MyMangatoonAdd: {
-      screen: MyMangatoonAdd,
-      navigationOptions: () => ({
-        title: "My Mangatoon Add",
-        headerTintColor: 'grey',
-        headerTitleStyle: {
-          fontWeight: 'bold',
         },
         headerRight: (
-          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
+          <Icon type="FontAwesome" name="check" onPress={() => navigation.navigate('ProfileEditAction')} style={{marginRight: 15}} />
         ),
       })
     },
-    AddEpisode: {
-      screen: AddEpisode,
-      navigationOptions: () => ({
-        title: "Add Episode",
-        headerTintColor: 'grey',
-        headerRight: (
-          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
-        ),
-      }),
+    MyCartoon: {
+      screen: MyCartoon,
+      title: 'My Cartoon',
+      navigationOptions: ({navigation}) => ({
+        title: "My Cartoon",
+        headerTintColor: '#000',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        }
+      })
     },
-    EditMangatoon: {
-      screen: EditMangatoon,
-      navigationOptions: () => ({
-        title: "Edit Mangaton",
-        headerTintColor: 'grey',
+    AddCartoon: {
+      screen: AddCartoon,
+      title: 'Create Webtoon',
+      navigationOptions: ({navigation}) => ({
+        title: "Create Webtoon",
+        headerTintColor: '#000',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        },
         headerRight: (
-          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
+          <Icon type="FontAwesome" name="check" style={{marginRight: 15}} />
         ),
-      }),
+      })
     },
-    DeleteEpisode: {
-      screen: DeleteEpisode,
-      navigationOptions: () => ({
-        title: "Edit Mangaton",
-        headerTintColor: 'grey',
+    AddEpisodeCartoon: {
+      screen: AddEpisodeCartoon,
+      title: 'Create Episode Webtoon',
+      navigationOptions: ({navigation}) => ({
+        title: "Create Episode Webtoon",
+        headerTintColor: '#000',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        },
         headerRight: (
-          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
+          <Icon type="FontAwesome" name="check" style={{marginRight: 15}} />
         ),
-      }),
+      })
     },
-    EditMangatoonEpisode: {
-      screen: EditMangatoonEpisode,
-      navigationOptions: () => ({
-        title: "Edit Mangaton Episode",
-        headerTintColor: 'grey',
+    EditCartoon: {
+      screen: EditCartoon,
+      title: 'Edit Webtoon',
+      navigationOptions: ({navigation}) => ({
+        title: "Edit Webtoon",
+        headerTintColor: '#000',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        },
         headerRight: (
-          <Icon name="ios-checkmark" style={{ color: '#000', marginRight: 15 }} />
+          <Icon type="FontAwesome" name="check" style={{marginRight: 15}} />
         ),
-      }),
+      })
     },
+    EditEpisodeCartoon: {
+      screen: EditEpisodeCartoon,
+      title: 'Edit Episode Webtoon',
+      navigationOptions: ({navigation}) => ({
+        title: "Edit Episode Webtoon",
+        headerTintColor: '#000',
+        headerStyle: {
+          backgroundColor: '#16a085'
+        },
+        headerTitleStyle: {
+          fontFamily: 'bold',
+        },
+        headerRight: (
+          <Icon type="FontAwesome" name="check" style={{marginRight: 15}} />
+        ),
+      })
+    }
 
   },
-  
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+  },
+);
+
+const Switch = createSwitchNavigator(
+  {
+    login: login,
+    project: project,
+  },
+  {
+    initialRouteName: 'login',
   }
 )
 
-export default createAppContainer(signIn);
-
-console.disableYellowBox = true;
+export default createAppContainer(Switch);

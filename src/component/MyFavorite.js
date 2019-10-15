@@ -76,7 +76,7 @@ export default class Home extends Component {
           <Card>
             <View>
               <View style={{ alignItems: 'center' }}>
-                <Text style={{color: '#ff6b81', fontSize: 24, fontWeight: 'bold'}}>ALL MANGA</Text>
+                <Text style={{color: '#ff6b81', fontSize: 24, fontWeight: 'bold'}}>YOUR FAVOURITE MANGA</Text>
               </View>
               <View>
                 <FlatList data={this.state.data} renderItem={({ item: rowData }) => {

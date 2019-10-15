@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 const AuthController = require('./controllers/auth')
 const TodosController = require('./controllers/todos')
 const RegisterController = require('./controllers/register')
+const ComicController = require('./controllers/comic')
 
 //middlewares
 const {authenticated} = require('./middleware')
@@ -28,6 +29,10 @@ app.group("/api/v1", (router) => {
 
     //Register User
     router.post('/register', RegisterController.store)
+
+    //Comic Api
+    router.get('/comics', ComicController.index)
+
 
     //another APIs goes here
 })

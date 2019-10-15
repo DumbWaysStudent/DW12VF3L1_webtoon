@@ -1,28 +1,45 @@
 ## A. Requirements
-- **Membuat Register**
+- **For You Implementation**
 
-## Menambahkan file controller register.js
+## Mengatur konfigurasi database di file config.json
 ```javascript
-const models = require('../models')
-const Todo = models.todo
-const User = models.user
-
-exports.store = (req, res) => {
-    User.create(req.body).then(todo=> {
-        res.send({
-            message: "success",
-            todo
-        })
-    })
-}
+    "development": {
+    "username": "root",
+    "password": null,
+    "database": "webtoonclone",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
 ```
 
-## Menambahkan route register di index.js
+## Membuat file migration create_comic
+
+## Buat Model comic
 ```javascript
-router.post('/register', RegisterController.store)
+    'use strict';
+    module.exports = (sequelize, DataTypes) => {
+    const comic = sequelize.define('comic', {
+        title: DataTypes.STRING,
+        genre: DataTypes.STRING,
+        isFavorite: DataTypes.BOOLEAN,
+        image: DataTypes.STRING,
+        createdBy: DataTypes.INTEGER
+    }, {});
+    comic.associate = function(models) {
+        // associations can be defined here
+    };
+    return comic;
+    };
 ```
 
-## Test Login
+## Membuat file seeder comic dan diisi dengan data dummy
 
-<img src="./image_git/Register.PNG" width="800" alt="get semua webtoon"/><br />
-<img src="./image_git/Register2.PNG" width="800" alt="get semua webtoon"/>
+## Buat route untuk comic di file index.js
+```javascript
+    const ComicController = require('./controllers/comic')
+
+    router.get('/comics', ComicController.index)
+```
+
+## Test For You Implementation
+
+<img src="./image_git/ForYpu.PNG" width="800" alt="get semua webtoon"/>

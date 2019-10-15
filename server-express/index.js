@@ -10,6 +10,7 @@ app.use(bodyParser.json())
 //controllers
 const AuthController = require('./controllers/auth')
 const TodosController = require('./controllers/todos')
+const RegisterController = require('./controllers/register')
 
 //middlewares
 const {authenticated} = require('./middleware')
@@ -24,6 +25,9 @@ app.group("/api/v1", (router) => {
     router.post('/todo', TodosController.store)
     router.patch('/todo/:id', TodosController.update)
     router.delete('/todo/:id', TodosController.delete)
+
+    //Register User
+    router.post('/register', RegisterController.store)
 
     //another APIs goes here
 })

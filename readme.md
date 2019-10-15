@@ -1,51 +1,28 @@
 ## A. Requirements
-- **Membuat Login**
+- **Membuat Register**
 
-## Menambahkan route di index
+## Menambahkan file controller register.js
 ```javascript
-router.post('/login', AuthController.login)
-```
-
-
-## Menambahkan controller auth.js
-
-```javascript
-const jwt = require('jsonwebtoken')
-
 const models = require('../models')
+const Todo = models.todo
 const User = models.user
 
-exports.login = (req, res)=>{
-    //check if email and pass match in db tbl user
-    const email = req.body.email
-    const password = req.body.password //use encryption in real world case!
-
-    User.findOne({where: {email, password}}).then(user=>{
-        if(user){
-            const token = jwt.sign({ userId: user.id }, 'my-secret-key')
-            res.send({
-                user,
-                token
-            })
-        }else{
-            res.send({
-                error: true,
-                message: "Wrong Email or Password!"
-            })
-        }
+exports.store = (req, res) => {
+    User.create(req.body).then(todo=> {
+        res.send({
+            message: "success",
+            todo
+        })
     })
-
-
-}   
+}
 ```
-## Menambahakan middleware.js
 
+## Menambahkan route register di index.js
 ```javascript
-const jwt = require('express-jwt')
-
-exports.authenticated = jwt({secret: 'my-secret-key'})
+router.post('/register', RegisterController.store)
 ```
 
 ## Test Login
 
-<img src="./image_git/Login.PNG" width="800" alt="get semua webtoon"/>
+<img src="./image_git/Register.PNG" width="800" alt="get semua webtoon"/><br />
+<img src="./image_git/Register2.PNG" width="800" alt="get semua webtoon"/>

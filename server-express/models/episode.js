@@ -10,6 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     episode.belongsTo(models.comic,{
       foreignKey:'comicId',
     })
+    episode.hasMany(models.page,{
+      foreignKey:'episodeId',
+    })
   };
   return episode;
 };

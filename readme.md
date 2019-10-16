@@ -1,84 +1,81 @@
-- **Detail Webtoon**
+- **Detail Episode Implementation**
 
-## Buat file migration create-episode
+## Buat file migration create-page
 
 ## Buat file seeder untuk mengisi tabel episodes
 ```javascript
     return queryInterface.bulkInsert('episodes', [
         {
-            "title": "Ep. 1",
+            "page": 1,
             "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "comicId": 1
-            },
-            {
-            "title": "Ep. 2",
+            "createdAt": "2019-10-10T08:31:21+00:00",
+            "updatedAt": "2019-10-10T08:31:21+00:00"
+        },
+        {
+            "page": 2,
             "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "comicId": 1
-            },
-            {
-            "title": "Ep. 3",
+            "createdAt": "2019-10-10T08:31:21+00:00",
+            "updatedAt": "2019-10-10T08:31:21+00:00"
+        },
+        {
+            "page": 3,
             "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "comicId": 1
-            }
+            "createdAt": "2019-10-10T08:31:21+00:00",
+            "updatedAt": "2019-10-10T08:31:21+00:00"
+        }
     ])
 ```
 
 ## Membuat relasi pada tabel comics dan tabel episodes
 ```javascript
-    //di model comics
-    comic.associate = function(models) {
-        comic.hasMany(models.episode,{
-        foreignKey:'comicId',
-        })
-    };
-
     //di model episode
     episode.associate = function(models) {
+        // associations can be defined here
         episode.belongsTo(models.comic,{
         foreignKey:'comicId',
         })
+        episode.hasMany(models.page,{
+        foreignKey:'episodeId',
+        })
+    };
+
+    //di model page
+    page.associate = function(models) {
+        // associations can be defined here
+        page.belongsTo(models.episode,{
+        foreignKey:'episodeId',
+        })
     };
 ```
 
-## Membuat file model episode.js dan membuat fungsi untuk menampilkan data episode berdasarkan comicId
+## Membuat file model page.js dan membuat fungsi untuk menampilkan data episode berdasarkan episodeId
 ```javascript
-//show all episode based on comicId
-    exports.indexEpisode = (req, res) => {
-        comicId = req.params.comicId
-        Episode.findAll({where: {comicId: comicId}}).then(episodes=>res.send(episodes))
+    //show all page based on episodeId
+    exports.indexPage = (req, res) => {
+        episodeId = req.params.episodeId
+        Page.findAll({where: {episodeId: episodeId}}).then(pages=>res.send(pages))
     }
 ```
 
-## Membuat function di comic.js untuk meampilkan data per id
+## Membuat function di episode.js untuk meampilkan data per id
 ```javascript
     //show data based on id
     exports.show = (req, res) => {
-        Comic.findOne({id: req.params.id}).then(comics=> res.send(comics))
+        Episode.findOne({id: req.params.id}).then(episodes=> res.send(episodes))
     }
 ```
 
-## Buat route untuk comic di file index.js
+## Buat route untuk menampilkan episode berdasarkan id dan menampilkan isi data page berdasarkan episodeId
 ```javascript
-    const ComicController = require('./controllers/comic')
+    //get episode based on id comic
+    router.get('/episode/:id', EpisodeController.show)
 
-    router.get('/comics', ComicController.index)
-```
+    //get pages from episode based on episodeId
+    router.get('/episode/:episodeId/pages', PageController.indexPage)
 
-## Test detail webtoon implementation
-
-
-
-## Buat route untuk menampilkan cimoc berdasarkan id dan menampilkan isi data episode berdasarkan comicId
-```javascript
-    //get comic based on id comic
-    router.get('/comic/:id', ComicController.show)
-
-    //get episodes from comic based on comicId
-    router.get('/comic/:comicId/episodes', EpisodeController.indexEpisode)
-
-    //Episode
-    router.get('/episodes',EpisodeController.index)
+    //Page
+    router.get('/pages',PageController.index)
 ```
 
 ## Test For You Implementation
-<img src="./image_git/DetailWebtoon.PNG" width="800" alt="webtoon"/>
+<img src="./image_git/DetailEpisode.PNG" width="800" alt="webtoon"/>

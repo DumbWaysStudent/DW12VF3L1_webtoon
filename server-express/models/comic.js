@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   comic.associate = function(models) {
     // associations can be defined here
+    comic.hasMany(models.episode,{
+      foreignKey:'comicId',
+    })
   };
   return comic;
 };

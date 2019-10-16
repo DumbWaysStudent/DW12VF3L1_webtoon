@@ -12,6 +12,7 @@ const AuthController = require('./controllers/auth')
 const TodosController = require('./controllers/todos')
 const RegisterController = require('./controllers/register')
 const ComicController = require('./controllers/comic')
+const EpisodeController = require('./controllers/episode')
 
 //middlewares
 const {authenticated} = require('./middleware')
@@ -32,6 +33,14 @@ app.group("/api/v1", (router) => {
 
     //Comic Api
     router.get('/comics', ComicController.index)
+    router.get('/comic/:id', ComicController.show)
+
+    //get episodes from comic based on comicId
+    router.get('/comic/:comicId/episodes', EpisodeController.indexEpisode)
+
+    //Episode
+    router.get('/episodes',EpisodeController.index)
+    router.get('/episode/:id', EpisodeController.show)
 
 
     //another APIs goes here

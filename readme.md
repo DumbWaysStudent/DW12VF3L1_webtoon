@@ -1,25 +1,20 @@
-- **Create My Episode**
+- **Update Episode**
 
-## Tambah route untuk menambahkan episode dan mengambil data gambar episode yang dibuat
+## Tambah route ubah data
 ```javascript
-    router.post('/user/:userId/comic/:comicId/episode', authenticated, EpisodeController.createEpisode)
-    router.get('/user/:userId/episode/:episodeId/images', authenticated, PageController.show)
+    router.put('/user/:userId/comic/:comicId/episode/:episodeId', authenticated, EpisodeController.updateEpisode)
 ```
 
-## Buat fungsi untuk menyimpan data episode di controller episode
+## Buat fungsi untuk mengubah data episode di controller episode
 ```javascript
-    exports.createEpisode = (req,res) => {
-        Episode.create({title: req.body.title, image: req.body.image, comicId: req.params.comicId}).then(episodes=> res.send(episodes))
-    }
-```
-
-## Buat fungsi untuk mengambil data gambar episode yang dibuat
-```javascript
-    exports.show = (req, res) => {
-        Page.findAll({where:{episodeId: req.params.episodeId}}).then(pages=> res.send(pages))
+    exports.updateEpisode = (req, res) => {
+        Episode.update(
+        req.body,
+        {
+            where:{id:req.params.episodeId}
+        }).then(comics=>res.send(comics))
     }
 ```
 
 ## Test Update creation Implementation
-<img src="./image_git/CreateEpisode1.PNG" width="800" alt="webtoon"/><br />
-<img src="./image_git/CreateEpisode2.PNG" width="800" alt="webtoon"/>
+<img src="./image_git/EditEpisode.PNG" width="800" alt="webtoon"/>

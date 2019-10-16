@@ -20,3 +20,11 @@ exports.show = (req, res) => {
 exports.createEpisode = (req,res) => {
   Episode.create({title: req.body.title, image: req.body.image, comicId: req.params.comicId}).then(episodes=> res.send(episodes))
 }
+
+exports.updateEpisode = (req, res) => {
+  Episode.update(
+  req.body,
+  {
+    where:{id:req.params.episodeId}
+  }).then(comics=>res.send(comics))
+}

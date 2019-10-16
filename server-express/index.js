@@ -67,6 +67,7 @@ app.group("/api/v1", (router) => {
     router.post('/user/:userId/comic/:comicId/episode', authenticated, EpisodeController.createEpisode)
     router.get('/user/:userId/episode/:episodeId/images', authenticated, PageController.show)
 
+    router.put('/user/:userId/comic/:comicId/episode/:episodeId', authenticated, EpisodeController.updateEpisode)
     //another APIs goes here
 })
 

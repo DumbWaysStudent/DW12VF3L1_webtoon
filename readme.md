@@ -1,18 +1,24 @@
-- **Create Webtoon Creation Implementation**
+- **Update Comic Creation Implementation**
 
-## Tambah route pada file index.js
+## Tambah route pada file index.js untuk menampilkan comic berdasarkan id user serta untuk mengubah data
 ```javascript
-    router.get('/user/:userId/comics', authenticated, ComicController.userComic)
-    router.post('/user/:userId/comic', authenticated, ComicController.createComic)
+    router.get('/user/:userId/comic/:comicId', authenticated, ComicController.show)
+    router.put('/user/:userId/comic/:comicId', authenticated, ComicController.updateComic)
 ```
 
-## Buat fungsi untuk memasukkan data berdasarkan id user
+## Buat fungsi untuk mengubah data berdasarkan id user
 ```javascript
-    //create comic based user
-    exports.createComic = (req, res) => {
-    Comic.create(req.body, req.body.userId = req.params.userId).then(comics=>res.send(comics))
-}
+    exports.updateComic = (req, res) => {
+        Comic.update(
+        req.body,
+        {
+            where:{id:req.params.comicId}
+        }).then(comics=>res.send(comics))
+    }
 ```
 
-## Test webtoon creation Implementation
-<img src="./image_git/WebtoonCreateImplementation.PNG" width="800" alt="webtoon"/>
+## Test Update creation Implementation
+<img src="./image_git/UpdateComic1.PNG" width="800" alt="webtoon"/><br />
+<img src="./image_git/UpdateComic2.PNG" width="800" alt="webtoon"/><br />
+<img src="./image_git/UpdateComic3.PNG" width="800" alt="webtoon"/><br />
+<img src="./image_git/UpdateComic4.PNG" width="800" alt="webtoon"/>

@@ -51,7 +51,7 @@ exports.favorite = (req, res) => {
 
 //show data based on id
 exports.show = (req, res) => {
-    Comic.findOne({id: req.params.id}).then(comics=> res.send(comics))
+    Comic.findOne({id: req.params.comicId}).then(comics=> res.send(comics))
 }
 
 //show all episode based on comicId
@@ -63,4 +63,12 @@ exports.userComic = (req, res) => {
 //create comic based user
 exports.createComic = (req, res) => {
   Comic.create(req.body, req.body.userId = req.params.userId).then(comics=>res.send(comics))
+}
+
+exports.updateComic = (req, res) => {
+  Comic.update(
+    req.body,
+  {
+    where:{id:req.params.comicId}
+  }).then(comics=>res.send(comics))
 }

@@ -1,11 +1,13 @@
+const Sequelize = require  ('sequelize')
 const models = require('../models')
 const Comic = models.comic
+const Search = Sequelize.Op
 
 //show all comic data
 exports.index = (req, res) => {
     //Buat variabel query untuk menampung
 
-    const {is_favorite} = req.query
+    const {is_favorite, title} = req.query
     console.log(is_favorite)
 
     if(is_favorite=='true'){
@@ -20,6 +22,14 @@ exports.index = (req, res) => {
           isFavorite:false
         }
       }).then(comics => res.send(comics))
+    } else if(title) {
+      Comic.findAll(
+        {
+          where: {
+            title: {[Search.like] : `%${title}%`}
+          }
+        }
+      ).then(comics => res.send(comics))
     } else {
       Comic.findAll().then(comics => res.send(comics))
     }

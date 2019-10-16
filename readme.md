@@ -1,20 +1,19 @@
-- **Update Episode**
+- **Delete Episode**
 
-## Tambah route ubah data
+## Tambah route delete data episode
 ```javascript
-    router.put('/user/:userId/comic/:comicId/episode/:episodeId', authenticated, EpisodeController.updateEpisode)
+    router.delete('/user/:userId/comic/:comicId/episode/:episodeId', authenticated, EpisodeController.deleteEpisode)
 ```
 
-## Buat fungsi untuk mengubah data episode di controller episode
+## Buat fungsi untuk hapus episode di controller episode
 ```javascript
-    exports.updateEpisode = (req, res) => {
-        Episode.update(
-        req.body,
+    exports.deleteEpisode = (req, res) => {
+        Episode.destroy(
         {
             where:{id:req.params.episodeId}
-        }).then(comics=>res.send(comics))
+        }).then(comics=>res.send('Sukses Hapus'))
     }
 ```
 
 ## Test Update creation Implementation
-<img src="./image_git/EditEpisode.PNG" width="800" alt="webtoon"/>
+<img src="./image_git/DeleteEpisode.PNG" width="800" alt="webtoon"/>

@@ -2,31 +2,28 @@
 
 ## Buat file migration create-page
 
-## Buat file seeder untuk mengisi tabel episodes
+## Buat file seeder untuk mengisi tabel pages
 ```javascript
-    return queryInterface.bulkInsert('episodes', [
+    return queryInterface.bulkInsert('pages', [
         {
             "page": 1,
             "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "createdAt": "2019-10-10T08:31:21+00:00",
-            "updatedAt": "2019-10-10T08:31:21+00:00"
+            "episodeId": 1
         },
         {
             "page": 2,
             "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "createdAt": "2019-10-10T08:31:21+00:00",
-            "updatedAt": "2019-10-10T08:31:21+00:00"
+            "episodeId": 1
         },
         {
             "page": 3,
             "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "createdAt": "2019-10-10T08:31:21+00:00",
-            "updatedAt": "2019-10-10T08:31:21+00:00"
+            "episodeId": 1
         }
     ])
 ```
 
-## Membuat relasi pada tabel comics dan tabel episodes
+## Membuat relasi pada tabel episodes dan tabel pages
 ```javascript
     //di model episode
     episode.associate = function(models) {
@@ -48,7 +45,7 @@
     };
 ```
 
-## Membuat file model page.js dan membuat fungsi untuk menampilkan data episode berdasarkan episodeId
+## Membuat file model page.js dan membuat fungsi untuk menampilkan data page berdasarkan episodeId
 ```javascript
     //show all page based on episodeId
     exports.indexPage = (req, res) => {

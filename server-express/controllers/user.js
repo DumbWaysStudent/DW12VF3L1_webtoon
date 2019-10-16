@@ -7,5 +7,5 @@ exports.index = (req, res) => {
 
 //show episode item based on episode id
 exports.show = (req, res) => {
-    User.findOne({id: req.params.id}).then(users=> res.send(users))
+    User.findOne({where: {id: req.params.id}}).then(users=> res.send(users))
 }

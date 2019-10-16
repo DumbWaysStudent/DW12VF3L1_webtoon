@@ -59,3 +59,8 @@ exports.userComic = (req, res) => {
     userId = req.params.userId
     Comic.findAll({where: {userId: userId}}).then(comics=>res.send(comics))
 }
+
+//create comic based user
+exports.createComic = (req, res) => {
+  Comic.create(req.body, req.body.userId = req.params.userId).then(comics=>res.send(comics))
+}

@@ -58,7 +58,8 @@ app.group("/api/v1", (router) => {
     //User
     router.get('/users',UserController.index)
     router.get('/user/:id',UserController.show)
-    router.get('/user/:userId/comic', ComicController.userComic)
+    router.get('/user/:userId/comics', authenticated, ComicController.userComic)
+    router.post('/user/:userId/comic', authenticated, ComicController.createComic)
 
     //another APIs goes here
 })

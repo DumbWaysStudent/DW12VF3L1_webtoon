@@ -1,10 +1,45 @@
 const models = require('../models')
 const Comic = models.comic
 
+//show all comic data
 exports.index = (req, res) => {
-    Comic.findAll().then(comics=>res.send(comics))
+    //Buat variabel query untuk menampung
+
+    const {is_favorite} = req.query
+    console.log(is_favorite)
+
+    if(is_favorite=='true'){
+      Comic.findAll({
+        where:{
+          isFavorite:true
+        }
+      }).then(comics => res.send(comics))
+    } else if(is_favorite=='false'){
+      Comic.findAll({
+        where:{
+          isFavorite:false
+        }
+      }).then(comics => res.send(comics))
+    } else {
+      Comic.findAll().then(comics => res.send(comics))
+    }
+
+    // let query
+    // if(req.query.is_favorite = true ){
+    //   query = Comic.findAll({
+    //     where:{
+    //       isFavorite: req.query.is_favorite
+    //     }
+    //   })
+    // }
+    // query.then(comics=>res.send(comics))
 }
 
+exports.favorite = (req, res) => {
+  Comic.findAll({where: {isFavorite: req.params.isFavorite}}).then(comics=>res.send(comics))
+}
+
+//show data based on id
 exports.show = (req, res) => {
     Comic.findOne({id: req.params.id}).then(comics=> res.send(comics))
 }

@@ -1,78 +1,102 @@
-- **Detail Episode Implementation**
+- **Fovorite Implementation dengan authentication**
 
-## Buat file migration create-page
+## Install express-jwt dan jsonwebtoken
+
+## Buat file migration create-user
 
 ## Buat file seeder untuk mengisi tabel pages
 ```javascript
-    return queryInterface.bulkInsert('pages', [
-        {
-            "page": 1,
-            "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "episodeId": 1
-        },
-        {
-            "page": 2,
-            "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "episodeId": 1
-        },
-        {
-            "page": 3,
-            "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
-            "episodeId": 1
-        }
+    return queryInterface.bulkInsert('users', [
+      {
+        email: 'irwanto@yahoo.com',
+        password: 'irwanto',
+        name: 'Irwanto'
+      },
+      {
+        email: 'wibowo@yahoo.com',
+        password: 'wibowo',
+        name: 'Wibowo'
+      },
+      {
+        email: 'rina@gmail.com',
+        password: 'rina',
+        name: 'Rina'
+      },
+
     ])
 ```
 
-## Membuat relasi pada tabel episodes dan tabel pages
+## Buat file Middleware
 ```javascript
-    //di model episode
-    episode.associate = function(models) {
-        // associations can be defined here
-        episode.belongsTo(models.comic,{
-        foreignKey:'comicId',
-        })
-        episode.hasMany(models.page,{
-        foreignKey:'episodeId',
-        })
-    };
+    const jwt = require('express-jwt')
 
-    //di model page
-    page.associate = function(models) {
-        // associations can be defined here
-        page.belongsTo(models.episode,{
-        foreignKey:'episodeId',
-        })
-    };
+    exports.authenticated = jwt({secret: 'my-secret-key'})
 ```
 
-## Membuat file model page.js dan membuat fungsi untuk menampilkan data page berdasarkan episodeId
+## buat file controller auth.js
 ```javascript
-    //show all page based on episodeId
-    exports.indexPage = (req, res) => {
-        episodeId = req.params.episodeId
-        Page.findAll({where: {episodeId: episodeId}}).then(pages=>res.send(pages))
+   const jwt = require('jsonwebtoken')
+
+const models = require('../models')
+const User = models.user
+
+exports.login = (req, res)=>{
+    //check if email and pass match in db tbl user
+    const email = req.body.email
+    const password = req.body.password //use encryption in real world case!
+
+    User.findOne({where: {email, password}}).then(user=>{
+        if(user){
+            const token = jwt.sign({ userId: user.id }, 'my-secret-key')
+            res.send({
+                user,
+                token
+            })
+        }else{
+            res.send({
+                error: true,
+                message: "Wrong Email or Password!"
+            })
+        }
+    })
     }
 ```
 
-## Membuat function di episode.js untuk meampilkan data per id
+## Import fungsi authenticated di index js
 ```javascript
-    //show data based on id
-    exports.show = (req, res) => {
-        Episode.findOne({id: req.params.id}).then(episodes=> res.send(episodes))
-    }
+    const {authenticated} = require('./middleware')
 ```
 
-## Buat route untuk menampilkan episode berdasarkan id dan menampilkan isi data page berdasarkan episodeId
+## Apply fungsi authenticated di route comics
 ```javascript
-    //get episode based on id comic
-    router.get('/episode/:id', EpisodeController.show)
+    router.get('/todos', authenticated, TodosController.index)
+```
 
-    //get pages from episode based on episodeId
-    router.get('/episode/:episodeId/pages', PageController.indexPage)
+## Modifikasi method/fungsi index  supaya bisa menampilkan data my favorite
+```javascript
+exports.index = (req, res) => {
+    //Buat variabel query untuk menampung
+    const {is_favorite} = req.query
+    console.log(is_favorite)
 
-    //Page
-    router.get('/pages',PageController.index)
+    if(is_favorite=='true'){
+        Comic.findAll({
+            where:{
+            isFavorite:true
+            }
+        }).then(comics => res.send(comics))
+        } else if(is_favorite=='false'){
+        Comic.findAll({
+            where:{
+            isFavorite:false
+            }
+        }).then(comics => res.send(comics))
+        } else {
+        Comic.findAll().then(comics => res.send(comics))
+        }
+    }
 ```
 
 ## Test Detail Episode Implementation
-<img src="./image_git/DetailEpisode.PNG" width="800" alt="webtoon"/>
+<img src="./image_git/Favorite.PNG" width="800" alt="webtoon"/><br />
+<img src="./image_git/Favorite2.PNG" width="800" alt="webtoon"/>

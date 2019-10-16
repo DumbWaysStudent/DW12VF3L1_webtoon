@@ -33,8 +33,11 @@ app.group("/api/v1", (router) => {
     router.post('/register', RegisterController.store)
 
     //Comic Api
-    router.get('/comics', ComicController.index)
+    router.get('/comics', authenticated, ComicController.index)
     router.get('/comic/:id', ComicController.show)
+
+    //get comics where isFavorite = true
+    router.get('/comic', authenticated, ComicController.favorite)
 
     //get episodes from comic based on comicId
     router.get('/comic/:comicId/episodes', EpisodeController.indexEpisode)

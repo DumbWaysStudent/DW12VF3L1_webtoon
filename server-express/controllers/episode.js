@@ -28,3 +28,10 @@ exports.updateEpisode = (req, res) => {
     where:{id:req.params.episodeId}
   }).then(comics=>res.send(comics))
 }
+
+exports.deleteEpisode = (req, res) => {
+  Episode.destroy(
+  {
+    where:{id:req.params.episodeId}
+  }).then(comics=>res.send('Sukses Hapus'))
+}

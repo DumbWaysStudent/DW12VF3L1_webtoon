@@ -67,8 +67,15 @@ exports.createComic = (req, res) => {
 
 exports.updateComic = (req, res) => {
   Comic.update(
-    req.body,
+  req.body,
   {
     where:{id:req.params.comicId}
   }).then(comics=>res.send(comics))
+}
+
+exports.deleteComic = (req, res) => {
+  Comic.destroy(
+  {
+    where:{id:req.params.comicId}
+  }).then(comics=>res.send('Sukses Hapus'))
 }

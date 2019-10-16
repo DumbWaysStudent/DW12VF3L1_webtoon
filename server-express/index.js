@@ -62,6 +62,7 @@ app.group("/api/v1", (router) => {
     router.post('/user/:userId/comic', authenticated, ComicController.createComic)
     router.get('/user/:userId/comic/:comicId', authenticated, ComicController.show)
     router.put('/user/:userId/comic/:comicId', authenticated, ComicController.updateComic)
+    router.delete('/user/:userId/comic/:comicId', authenticated, ComicController.deleteComic)
 
     //another APIs goes here
 })

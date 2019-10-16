@@ -21,7 +21,8 @@ module.exports = {
         "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
         "createdAt": "2019-10-10T08:31:21+00:00",
         "updatedAt": "2019-10-10T08:31:21+00:00",
-        "createdBy": 1
+        "createdBy": 1,
+        "userId": 1
       },
       {
         "title": "Age Matters",
@@ -30,7 +31,8 @@ module.exports = {
         "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
         "createdAt": "2019-10-10T08:31:21+00:00",
         "updatedAt": "2019-10-10T08:31:21+00:00",
-        "createdBy": 1
+        "createdBy": 1,
+        "userId": 1,
       },
       {
         "title": "A Good Day to be a Dog",
@@ -39,7 +41,8 @@ module.exports = {
         "image": "https://www.forbes.com/sites/joanmacdonald.jpg",
         "createdAt": "2019-10-10T08:31:21+00:00",
         "updatedAt": "2019-10-10T08:31:21+00:00",
-        "createdBy": 1
+        "createdBy": 1,
+        "userId": 1,
       }
     ])
   },

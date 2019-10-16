@@ -16,3 +16,7 @@ exports.indexPage = (req, res) => {
 exports.show = (req, res) => {
     Page.findOne({id: req.params.id}).then(pages=> res.send(pages))
 }
+
+exports.show = (req, res) => {
+    Page.findAll({where:{episodeId: req.params.episodeId}}).then(pages=> res.send(pages))
+}

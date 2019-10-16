@@ -16,3 +16,7 @@ exports.indexEpisode = (req, res) => {
 exports.show = (req, res) => {
     Episode.findOne({id: req.params.id}).then(episodes=> res.send(episodes))
 }
+
+exports.createEpisode = (req,res) => {
+  Episode.create({title: req.body.title, image: req.body.image, comicId: req.params.comicId}).then(episodes=> res.send(episodes))
+}

@@ -74,5 +74,5 @@
     router.get('/pages',PageController.index)
 ```
 
-## Test For You Implementation
+## Test Detail Episode Implementation
 <img src="./image_git/DetailEpisode.PNG" width="800" alt="webtoon"/>

@@ -64,10 +64,6 @@
     router.get('/comics', ComicController.index)
 ```
 
-## Test detail webtoon implementation
-
-
-
 ## Buat route untuk menampilkan cimoc berdasarkan id dan menampilkan isi data episode berdasarkan comicId
 ```javascript
     //get comic based on id comic
@@ -80,5 +76,5 @@
     router.get('/episodes',EpisodeController.index)
 ```
 
-## Test For You Implementation
+## Test detail webtoon implementation
 <img src="./image_git/DetailWebtoon.PNG" width="800" alt="webtoon"/>

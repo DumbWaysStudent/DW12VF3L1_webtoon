@@ -20,3 +20,13 @@ exports.show = (req, res) => {
 exports.show = (req, res) => {
     Page.findAll({where:{episodeId: req.params.episodeId}}).then(pages=> res.send(pages))
 }
+
+exports.createImageEpisode = (req, res) => {
+  Page.create(
+    {
+      page: req.body.page,
+      image: req.body.image,
+      episodeId: req.params.episodeId
+    }
+  ).then(pages=> res.send(pages))
+}

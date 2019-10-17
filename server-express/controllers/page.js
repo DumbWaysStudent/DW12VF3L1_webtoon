@@ -30,3 +30,10 @@ exports.createImageEpisode = (req, res) => {
     }
   ).then(pages=> res.send(pages))
 }
+
+exports.deleteImageEpisode = (req, res) => {
+  Page.destroy(
+  {
+    where:{id:req.params.imageId}
+  }).then(comics=>res.send('Sukses Hapus'))
+}

@@ -1,22 +1,19 @@
-- **Create Image Episode**
+- **Detele Image Detail Episode**
 
-## Tambah route delete data episode
+## Tambah route delete data detail episode
 ```javascript
-    router.post('/user/:userId/comic/:comicId/episode/:episodeId/image', authenticated, PageController.createImageEpisode)
+    router.delete('/user/:userId/comic/:comicId/episode/:episodeId/image/:imageId', authenticated, PageController.deleteImageEpisode)
 ```
 
-## Buat fungsi untuk menympan datanya
+## Buat fungsi untuk menghapus datanya
 ```javascript
-    exports.createImageEpisode = (req, res) => {
-    Page.create(
+    exports.deleteImageEpisode = (req, res) => {
+    Page.destroy(
         {
-        page: req.body.page,
-        image: req.body.image,
-        episodeId: req.params.episodeId
-        }
-    ).then(pages=> res.send(pages))
+            where:{id:req.params.imageId}
+        }).then(comics=>res.send('Sukses Hapus'))
     }
 ```
 
 ## Test Image Episode Implementation
-<img src="./image_git/CreateImageEpisode.PNG" width="800" alt="webtoon"/>
+<img src="./image_git/DeleteImageDetailEpisode.PNG" width="800" alt="webtoon"/>
